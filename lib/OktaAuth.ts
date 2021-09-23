@@ -559,8 +559,10 @@ class OktaAuth implements SDKInterface, SigninAPI, SignoutAPI {
   }
 
   setOriginalUri(originalUri: string): void {
-    const storage = browserStorage.getSessionStorage();
-    storage.setItem(REFERRER_PATH_STORAGE_KEY, originalUri);
+    if (browserStorage.browserHasSessionStorage()){
+      const storage = browserStorage.getSessionStorage();
+      storage.setItem(REFERRER_PATH_STORAGE_KEY, originalUri);
+    }
   }
 
   getOriginalUri(): string {
